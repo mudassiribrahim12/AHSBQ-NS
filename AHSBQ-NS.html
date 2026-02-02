@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help-Seeking Assessment | Professional Instrument</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+        }
+        
+        /* Single centered column container */
+        .centered-container {
+            width: 100%;
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Black Header */
+        .black-header {
+            background: #000000;
+            color: white;
+            padding: 50px 40px;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+        
+        .black-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        h1 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #ffffff, #e0e0e0);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+            line-height: 1.3;
+        }
+        
+        .subtitle {
+            font-size: 18px;
+            opacity: 0.9;
+            margin: 15px auto;
+            line-height: 1.6;
+            color: #f0f0f0;
+            max-width: 700px;
+        }
+        
+        .instrument-info {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 25px;
+            border-radius: 25px;
+            margin-top: 20px;
+            font-size: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Main Content */
+        .content-wrapper {
+            padding: 40px;
+        }
+        
+        /* Instructions Section */
+        .instructions-card {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+        
+        .instructions-card h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+        
+        .instructions-card h2 i {
+            color: #667eea;
+        }
+        
+        .instructions-text {
+            font-size: 17px;
+            color: #555;
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
+        
+        /* Rating Scale */
+        .rating-scale {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .scale-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .scale-item {
+            text-align: center;
+            padding: 15px 8px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .scale-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .scale-number {
+            font-size: 24px;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 8px;
+        }
+        
+        .scale-label {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.3;
+            font-weight: 500;
+        }
+        
+        .note-box {
+            background: #fff8e1;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 25px;
+            border-left: 5px solid #ffc107;
+            font-size: 16px;
+            text-align: center;
+        }
+        
+        /* Assessment Table */
+        .assessment-title {
+            font-size: 28px;
+            color: #2c3e50;
+            margin: 40px 0 30px 0;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .assessment-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 30px 0;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+        
+        .assessment-table thead {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+        }
+        
+        .assessment-table th {
+            color: white;
+            padding: 20px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 16px;
+            border-bottom: none;
+        }
+        
+        .assessment-table th:first-child {
+            width: 50px;
+            text-align: center;
+        }
+        
+        .assessment-table th:last-child {
+            width: 180px;
+        }
+        
+        .assessment-table td {
+            padding: 22px;
+            background: white;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .assessment-table tr:nth-child(even) td {
+            background: #fafafa;
+        }
+        
+        .assessment-table tr:hover td {
+            background: #f8f9ff;
+        }
+        
+        .item-number {
+            font-weight: 700;
+            color: #2c3e50;
+            font-size: 20px;
+            text-align: center;
+        }
+        
+        .item-text {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #333;
+            padding-right: 15px;
+        }
+        
+        .rating-options {
+            display: flex;
+            justify-content: space-between;
+            background: rgba(102, 126, 234, 0.05);
+            padding: 12px;
+            border-radius: 12px;
+        }
+        
+        .rating-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .option-input {
+            margin-bottom: 8px;
+            cursor: pointer;
+            accent-color: #667eea;
+        }
+        
+        input[type="radio"] {
+            width: 20px;
+            height: 20px;
+        }
+        
+        .option-label {
+            font-size: 12px;
+            color: #666;
+            font-weight: 500;
+        }
+        
+        /* Buttons */
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 40px 0 20px;
+        }
+        
+        .btn {
+            padding: 16px 35px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            min-width: 180px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(102, 126, 234, 0.05);
+            transform: translateY(-3px);
+        }
+        
+        /* Results Section */
+        .results-container {
+            display: none;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin-top: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+        
+        .results-container.active {
+            display: block;
+            animation: fadeIn 0.6s ease;
+        }
+        
+        .results-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .results-title {
+            font-size: 32px;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .results-subtitle {
+            font-size: 18px;
+            color: #666;
+        }
+        
+        .total-score-display {
+            text-align: center;
+            padding: 35px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border-radius: 15px;
+            margin: 30px 0;
+        }
+        
+        .total-score-label {
+            font-size: 20px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .total-score {
+            font-size: 64px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin: 15px 0;
+        }
+        
+        .scale-results {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .scale-result {
+            padding: 25px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .scale-result:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .result-scale-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        .result-mean {
+            font-size: 36px;
+            font-weight: 800;
+            margin: 15px 0;
+        }
+        
+        .scale-1 .result-mean { color: #27ae60; }
+        .scale-2 .result-mean { color: #e74c3c; }
+        .scale-3 .result-mean { color: #f39c12; }
+        
+        .score-label {
+            font-size: 15px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+        
+        .score-details {
+            font-size: 14px;
+            color: #777;
+            margin-top: 10px;
+        }
+        
+        .highlighted {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.05);
+            position: relative;
+        }
+        
+        .highlighted::before {
+            content: 'HIGHEST SCORE';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .interpretation-guidance {
+            background: rgba(102, 126, 234, 0.05);
+            padding: 25px;
+            border-radius: 16px;
+            margin-top: 30px;
+            border-left: 5px solid #667eea;
+        }
+        
+        .interpretation-guidance h3 {
+            font-size: 20px;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .interpretation-guidance p {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #555;
+        }
+        
+        /* Black Footer */
+        .black-footer {
+            background: #000000;
+            color: white;
+            padding: 40px;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #ffffff, #e0e0e0);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .footer-info {
+            font-size: 15px;
+            opacity: 0.8;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            color: #f0f0f0;
+        }
+        
+        .copyright {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 13px;
+            opacity: 0.6;
+            color: #ccc;
+        }
+        
+        /* Validation */
+        .validation-error {
+            color: #e74c3c;
+            font-size: 13px;
+            margin-top: 8px;
+            display: none;
+        }
+        
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Responsive */
+        @media (max-width: 850px) {
+            .centered-container {
+                max-width: 95%;
+            }
+            
+            .scale-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .scale-results {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .rating-options {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 5px;
+            }
+            
+            .rating-option {
+                flex: 0 0 calc(33.333% - 10px);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 15px;
+            }
+            
+            .black-header, .content-wrapper {
+                padding: 40px 25px;
+            }
+            
+            .assessment-table {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            .scale-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            h1 {
+                font-size: 28px;
+            }
+            
+            .assessment-title {
+                font-size: 24px;
+            }
+            
+            .total-score {
+                font-size: 48px;
+            }
+            
+            .result-mean {
+                font-size: 30px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .black-header, .content-wrapper {
+                padding: 30px 20px;
+            }
+            
+            .scale-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .item-text {
+                font-size: 14px;
+            }
+            
+            .results-container {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Single centered column container -->
+    <div class="centered-container">
+        <!-- Black Header -->
+        <header class="black-header">
+            <div class="header-content">
+                <h1>Help-Seeking Behavior Assessment</h1>
+                <p class="subtitle">A professional psychological instrument designed to evaluate help-seeking preferences in educational and professional settings.</p>
+                <p class="subtitle">Complete all items below to receive your personalized assessment results.</p>
+                <div class="instrument-info">
+                    19 Items • 3 Scales • 7-Point Likert Scale
+                </div>
+            </div>
+        </header>
+        
+        <!-- Main Content -->
+        <div class="content-wrapper">
+            <!-- Instructions -->
+            <div class="instructions-card">
+                <h2><i class="fas fa-clipboard-check"></i> Assessment Instructions</h2>
+                <p class="instructions-text">For each statement below, select the number that best represents your attitude or behavior using the following scale:</p>
+                
+                <div class="rating-scale">
+                    <div class="scale-grid">
+                        <div class="scale-item">
+                            <div class="scale-number">1</div>
+                            <div class="scale-label">Strongly Disagree</div>
+                        </div>
+                        <div class="scale-item">
+                            <div class="scale-number">2</div>
+                            <div class="scale-label">Disagree</div>
+                        </div>
+                        <div class="scale-item">
+                            <div class="scale-number">3</div>
+                            <div class="scale-label">Somewhat Disagree</div>
+                        </div>
+                        <div class="scale-item">
+                            <div class="scale-number">4</div>
+                            <div class="scale-label">Neutral</div>
+                        </div>
+                        <div class="scale-item">
+                            <div class="scale-number">5</div>
+                            <div class="scale-label">Somewhat Agree</div>
+                        </div>
+                        <div class="scale-item">
+                            <div class="scale-number">6</div>
+                            <div class="scale-label">Agree</div>
+                        </div>
+                        <div class="scale-item">
+                            <div class="scale-number">7</div>
+                            <div class="scale-label">Strongly Agree</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="note-box">
+                    <strong>Note:</strong> Please respond to all items to receive accurate results.
+                </div>
+            </div>
+            
+            <!-- Assessment Items -->
+            <h2 class="assessment-title">Assessment Items</h2>
+            
+            <table class="assessment-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Statement</th>
+                        <th>Your Response (1-7)</th>
+                    </tr>
+                </thead>
+                <tbody id="assessment-items">
+                    <!-- Items will be populated by JavaScript -->
+                </tbody>
+            </table>
+            
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button class="btn btn-primary" id="calculate-btn">
+                    <i class="fas fa-chart-bar"></i> Generate Results
+                </button>
+                <button class="btn btn-secondary" id="reset-btn">
+                    <i class="fas fa-undo-alt"></i> Clear Form
+                </button>
+            </div>
+            
+            <!-- Results Section -->
+            <div class="results-container" id="results">
+                <div class="results-header">
+                    <div class="results-title">Your Assessment Results</div>
+                    <div class="results-subtitle">Personalized Analysis</div>
+                </div>
+                
+                <div class="total-score-display">
+                    <div class="total-score-label">Total Assessment Score</div>
+                    <div class="total-score" id="total-score">0</div>
+                    <div class="total-score-label">Sum of all item responses (19 items)</div>
+                </div>
+                
+                <div class="scale-results">
+                    <div class="scale-result scale-1" id="result-scale-1">
+                        <div class="result-scale-title">Instrumental</div>
+                        <div class="result-mean" id="mean-scale-1">0.00</div>
+                        <div class="score-label">Mean Score (3 items)</div>
+                        <div class="score-details">Prefers conceptual understanding over direct answers</div>
+                    </div>
+                    
+                    <div class="scale-result scale-2" id="result-scale-2">
+                        <div class="result-scale-title">Executive</div>
+                        <div class="result-mean" id="mean-scale-2">0.00</div>
+                        <div class="score-label">Mean Score (9 items)</div>
+                        <div class="score-details">Prefers direct answers and solutions</div>
+                    </div>
+                    
+                    <div class="scale-result scale-3" id="result-scale-3">
+                        <div class="result-scale-title">Avoidance</div>
+                        <div class="result-mean" id="mean-scale-3">0.00</div>
+                        <div class="score-label">Mean Score (7 items)</div>
+                        <div class="score-details">Reluctance to seek assistance</div>
+                    </div>
+                </div>
+                
+                <div class="interpretation-guidance">
+                    <h3>Interpretation Guidance</h3>
+                    <p>The scale with the highest mean score indicates your predominant help-seeking style. Compare your scores across the three dimensions to understand your behavioral preferences. Instrumental style focuses on understanding concepts, Executive style prioritizes solutions, and Avoidance style indicates hesitance to seek help. Higher scores represent stronger tendencies in each dimension.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Black Footer -->
+    <footer class="black-footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                PsyMetrics
+            </div>
+            <div class="footer-info">
+                Professional psychological assessment instruments for educational and organizational development.
+            </div>
+            <div class="copyright">
+                © 2023 PsyMetrics Assessment Tools. All rights reserved. This instrument is for professional use only.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Instrument data with exact items from specification
+        const instrumentData = [
+            {
+                id: "item1",
+                text: "When I ask my nurse educator for help understanding the material in this class, I prefer that the nurse educator help me understand the general ideas rather than simply tell me the answer.",
+                scale: 1
+            },
+            {
+                id: "item2",
+                text: "When I ask a student for help understanding the material in this class, I prefer that the student help me understand the general ideas rather than simply tell me the answer.",
+                scale: 1
+            },
+            {
+                id: "item3",
+                text: "When I ask a student for help with something I don't understand, I ask the student to explain it to me rather than just give me the answer.",
+                scale: 1
+            },
+            {
+                id: "item4",
+                text: "When I ask my nurse educator for help on something I don't understand, I prefer that nurse educator do it for me.",
+                scale: 2
+            },
+            {
+                id: "item5",
+                text: "When I ask my nurse educator for help on something I don't understand, I prefer the nurse educator to just give me the answer rather than explain it.",
+                scale: 2
+            },
+            {
+                id: "item6",
+                text: "When I ask the nurse educator for help with my work, I prefer to be given the answer rather than an explanation of how to do the work myself.",
+                scale: 2
+            },
+            {
+                id: "item7",
+                text: "When I ask my nurse educator for help, I want the nurse educator to do the work for me rather than help me be able to complete the work myself.",
+                scale: 2
+            },
+            {
+                id: "item8",
+                text: "When I ask a student for help on something I don't understand, I prefer that the student just give me the answer rather than explain it.",
+                scale: 2
+            },
+            {
+                id: "item9",
+                text: "When I ask a student for help with my work, I prefer that the student do the work for me rather than explain to me how to do it.",
+                scale: 2
+            },
+            {
+                id: "item10",
+                text: "When I ask another student for help on something I don't understand, I ask that student to do it for me.",
+                scale: 2
+            },
+            {
+                id: "item11",
+                text: "When I ask a student for help in this class, I want the work done for me rather than be helped to complete the work myself.",
+                scale: 2
+            },
+            {
+                id: "item12",
+                text: "When I ask a student for help with my work, I prefer to be given the answer rather than an explanation of how to do the work myself.",
+                scale: 2
+            },
+            {
+                id: "item13",
+                text: "I don't ask for help in this class even when the work is too hard to solve on my own.",
+                scale: 3
+            },
+            {
+                id: "item14",
+                text: "If I need help to solve a problem, I prefer to skip it rather than ask for help.",
+                scale: 3
+            },
+            {
+                id: "item15",
+                text: "I don't ask for help in this class even if I don't understand the lesson.",
+                scale: 3
+            },
+            {
+                id: "item16",
+                text: "If I didn't understand something in this class, I would guess rather than ask someone for help.",
+                scale: 3
+            },
+            {
+                id: "item17",
+                text: "I would rather do worse on an assignment I couldn't finish than ask for help in this class.",
+                scale: 3
+            },
+            {
+                id: "item18",
+                text: "Even if the work was too hard to do on my own, I wouldn't ask for help in this class.",
+                scale: 3
+            },
+            {
+                id: "item19",
+                text: "I would put down any answer rather than ask for help in this class.",
+                scale: 3
+            }
+        ];
+
+        // Initialize the assessment table
+        document.addEventListener('DOMContentLoaded', function() {
+            const tableBody = document.getElementById('assessment-items');
+            
+            // Create table rows for each item
+            instrumentData.forEach((item, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = createTableRow(item, index + 1);
+                tableBody.appendChild(row);
+            });
+            
+            // Set up event listeners
+            document.getElementById('calculate-btn').addEventListener('click', calculateResults);
+            document.getElementById('reset-btn').addEventListener('click', resetAssessment);
+            
+            // Clear validation errors when user selects a rating
+            document.addEventListener('change', function(e) {
+                if (e.target.type === 'radio') {
+                    const itemId = e.target.name;
+                    const errorElement = document.getElementById(`error-${itemId}`);
+                    if (errorElement) {
+                        errorElement.style.display = 'none';
+                    }
+                }
+            });
+        });
+
+        // Create a table row for an item
+        function createTableRow(item, itemNumber) {
+            const itemId = item.id;
+            const itemText = item.text;
+            
+            // Create rating options HTML
+            let ratingOptionsHTML = '<div class="rating-options">';
+            for (let i = 1; i <= 7; i++) {
+                ratingOptionsHTML += `
+                    <div class="rating-option">
+                        <input type="radio" name="${itemId}" id="${itemId}-${i}" value="${i}" class="option-input">
+                        <label for="${itemId}-${i}" class="option-label">${i}</label>
+                    </div>
+                `;
+            }
+            ratingOptionsHTML += '</div>';
+            
+            return `
+                <td class="item-number">${itemNumber}</td>
+                <td>
+                    <div class="item-text">${itemText}</div>
+                    <div class="validation-error" id="error-${itemId}">Please select a rating for this item</div>
+                </td>
+                <td>${ratingOptionsHTML}</td>
+            `;
+        }
+
+        // Calculate and display results
+        function calculateResults() {
+            // Hide all validation errors
+            document.querySelectorAll('.validation-error').forEach(el => {
+                el.style.display = 'none';
+            });
+            
+            let allValid = true;
+            let totalScore = 0;
+            let scaleScores = {1: {sum: 0, count: 0}, 2: {sum: 0, count: 0}, 3: {sum: 0, count: 0}};
+            
+            // Check all items
+            instrumentData.forEach(item => {
+                const itemId = item.id;
+                const selectedRating = document.querySelector(`input[name="${itemId}"]:checked`);
+                
+                if (!selectedRating) {
+                    // Show validation error
+                    document.getElementById(`error-${itemId}`).style.display = 'block';
+                    allValid = false;
+                } else {
+                    const ratingValue = parseInt(selectedRating.value);
+                    totalScore += ratingValue;
+                    
+                    // Add to scale score
+                    scaleScores[item.scale].sum += ratingValue;
+                    scaleScores[item.scale].count += 1;
+                }
+            });
+            
+            if (!allValid) {
+                alert("Please respond to all items before generating results.");
+                return;
+            }
+            
+            // Calculate scale means
+            const scaleMeans = {};
+            let highestMean = 0;
+            let highestScaleId = 1;
+            
+            for (const scaleId in scaleScores) {
+                const mean = scaleScores[scaleId].sum / scaleScores[scaleId].count;
+                scaleMeans[scaleId] = mean;
+                
+                if (mean > highestMean) {
+                    highestMean = mean;
+                    highestScaleId = parseInt(scaleId);
+                }
+            }
+            
+            // Display results
+            document.getElementById('total-score').textContent = totalScore;
+            document.getElementById('mean-scale-1').textContent = scaleMeans[1].toFixed(2);
+            document.getElementById('mean-scale-2').textContent = scaleMeans[2].toFixed(2);
+            document.getElementById('mean-scale-3').textContent = scaleMeans[3].toFixed(2);
+            
+            // Remove highlight from all scales
+            document.querySelectorAll('.scale-result').forEach(el => {
+                el.classList.remove('highlighted');
+            });
+            
+            // Highlight the scale with the highest mean
+            document.getElementById(`result-scale-${highestScaleId}`).classList.add('highlighted');
+            
+            // Show results container
+            document.getElementById('results').classList.add('active');
+            
+            // Scroll to results
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // Reset the assessment
+        function resetAssessment() {
+            // Clear all radio buttons
+            document.querySelectorAll('.option-input').forEach(input => {
+                input.checked = false;
+            });
+            
+            // Hide validation errors
+            document.querySelectorAll('.validation-error').forEach(el => {
+                el.style.display = 'none';
+            });
+            
+            // Hide results
+            document.getElementById('results').classList.remove('active');
+            
+            // Remove highlight from scales
+            document.querySelectorAll('.scale-result').forEach(el => {
+                el.classList.remove('highlighted');
+            });
+            
+            // Reset scores to 0
+            document.getElementById('total-score').textContent = '0';
+            document.getElementById('mean-scale-1').textContent = '0.00';
+            document.getElementById('mean-scale-2').textContent = '0.00';
+            document.getElementById('mean-scale-3').textContent = '0.00';
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
